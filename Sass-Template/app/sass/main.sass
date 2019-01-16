@@ -1,0 +1,90 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+*
+	box-sizing: border-box
+::placeholder
+	color: rgba($accent, .8)
+::selection
+	background-color: $accent
+	color: $white
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.65
+	font-family: $default-font
+	color: $dark
+	overflow-x: hidden
+	background-color: $white
+	opacity: 1
+	input, textarea
+		border: #666 1px solid
+		outline: none
+		&:focus:required:invalid
+			border-color: red
+		&:required:valid
+			border-color: green
+img
+	display: block
+	max-width: 100%
+	height: auto
+.text-center
+	text-align: center
+
+/*Main Style*/
+@mixin opacity($opacity)
+	opacity: $opacity / 100
+	filter: alpha(opacity=$opacity)
+.preloader
+	position: fixed
+	top: 0
+	left: 0
+	bottom: 0
+	right: 0
+	z-index: 100
+	background-color: $white
+	.pulse
+		position: relative
+		left: 50%
+		top: 50vh
+		margin:
+			left: -40px
+			top: -40px
+		&::before, &::after
+			content: ''
+			border: 5px solid $accent
+			width: 80px
+			height: 80px
+			border-radius: 500px
+			position: absolute
+		&::before
+			animation: pulse-outer .8s ease-in infinite
+		&::after
+			animation: pulse-inner .8s linear infinite
+@keyframes pulse-outer
+	0%
+		@include opacity(100)
+	50%
+		@include opacity(50)
+	100%
+		@include opacity(0)
+@keyframes pulse-inner
+	0%
+		@include opacity(0)
+		transform: scale(0)
+	100%
+		@include opacity(100)
+		transform: scale(1)
+ul
+	margin: 0
+	padding: 0
+	font-size: 0
+a, a:active, a:visited
+	color: $white
+	text-decoration: none
+	transition: color ease .3s
+	&:hover
+		color: $accent
+
+@import "media" // Always at the end
